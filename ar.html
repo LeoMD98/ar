@@ -43,15 +43,17 @@
     </style>
 
 <div style='position: fixed; top: 10px; width:100%; text-align: center; z-index: 1;'>
-    <button class="button" id="btn1">Model 1</button>
-    <button class="button" id="btn2">Model 2</button>
-    <button class="button" id="btn3">Model 3</button>
+    <button class="button" id="btn1">Modelo 1</button>
+    <button class="button" id="btn2">Modelo 2</button>
+    <button class="button" id="btn3">Modelo 3</button>
 </div>
 
 <body style='margin : 0px; overflow: hidden;'></body>
     <a-scene embedded arjs="debugUIEnabled: false;" vr-mode-ui="enabled: false">  
    
       <a-marker preset="hiro">
+        <video id="mivideo" crossOrigin="anonymous" playsinline webkitplaysinline autoplay controls muted src="pig.mp4"></video>
+        <a-video src="#mivideo" position="0 0 0" scale="3 2 2" rotation="270 0 0" ></a-video>
        
         <a-entity id="entityID1">
       </a-marker>
@@ -59,6 +61,19 @@
     </a-scene>
 
     <script>
+
+var m = document.querySelector("a-marker")
+      m.addEventListener("markerFound", (e)=>{
+      console.log("found")
+      var v = document.querySelector('#mivideo').play();
+   
+
+})
+      m.addEventListener("markerLost", (e)=>{
+      console.log("lost")
+      var v = document.querySelector('#mivideo').pause();
+  
+}) 
         
      document.getElementById("btn1").addEventListener("click", (e)=>{
                     var el = document.querySelector('#entityID1');
@@ -70,20 +85,16 @@ document.getElementById("btn2").addEventListener("click", (e)=>{
                     
                     var el = document.querySelector('#entityID1');
               
-                    el.setAttribute("obj-model", 'obj:url(modelhist/ForestScene.obj);mtl:url(modelhist/ForestScene.mtl)');
-                    el.setAttribute("scale",'.005 .005 .005');               
+                    el.setAttribute("obj-model", 'obj:url(bolas.obj);mtl:url(bolas.mtl)');
+                    el.setAttribute("scale",'.10 .10 .10');               
 })
-
 
 
 document.getElementById("btn3").addEventListener("click", (e)=>{
-                    
-                    var el = document.querySelector('#entityID1');
-              
-                    el.setAttribute("obj-model", 'obj:url(model3d/LDI_ArtecEVA_Glove_color_in.obj);mtl:url(model3d/LDI_ArtecEVA_Glove_color_in.mtl)');
-                    el.setAttribute("scale",'.20 .20 .20');                  
+
+var v = document.querySelector('#mivideo').play();
+})            
                   
-})
 
 </script>  
   </body>
